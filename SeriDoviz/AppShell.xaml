@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="SeriDoviz.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:SeriDoviz.Views"
+       Shell.NavBarIsVisible="False"
+       Shell.TabBarBackgroundColor="{StaticResource HeaderBottom}"
+       Shell.TabBarForegroundColor="{StaticResource Gold}"
+       Shell.TabBarTitleColor="{StaticResource Gold}"
+       Shell.TabBarUnselectedColor="#6E7790">
+
+    <TabBar>
+        <ShellContent Title="Döviz"    Icon="tab_doviz.png"    ContentTemplate="{DataTemplate views:DovizPage}" />
+        <ShellContent Title="Altın"    Icon="tab_altin.png"    ContentTemplate="{DataTemplate views:AltinPage}" />
+        <ShellContent Title="Çevirici" Icon="tab_cevirici.png" ContentTemplate="{DataTemplate views:CeviriciPage}" />
+    </TabBar>
+</Shell>

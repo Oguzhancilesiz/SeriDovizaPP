@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SeriDoviz.Converters"
+             x:Class="SeriDoviz.App">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- Geriye dönük uyumluluk: eski XAML'ler HeaderBottom bekliyor -->
+            <Color x:Key="HeaderBottom">#0E1E3D</Color>
+
+            <!-- Dark + Gold palet -->
+            <Color x:Key="Bg">#0A0D13</Color>
+            <Color x:Key="Card">#121722</Color>
+            <Color x:Key="CardAlt">#0E1320</Color>
+            <Color x:Key="Line">#1F2736</Color>
+            <Color x:Key="HeaderDivider">#0B1220</Color>
+
+            <Color x:Key="Text">#E8EEF9</Color>
+            <Color x:Key="Muted">#9AA6B2</Color>
+
+            <!-- Vurgulu up/down -->
+            <Color x:Key="Up">#17FF92</Color>
+            <Color x:Key="UpSoft">#0C3B2B</Color>
+            <Color x:Key="Down">#FF5252</Color>
+            <Color x:Key="DownSoft">#3A1417</Color>
+
+            <Color x:Key="Gold">#E8C15A</Color>
+            <Color x:Key="GoldSoft">#3B2E12</Color>
+            <SolidColorBrush x:Key="CardBrush" Color="{StaticResource Card}" />
+            <SolidColorBrush x:Key="CardAltBrush" Color="{StaticResource CardAlt}" />
+            <SolidColorBrush x:Key="GoldBrush" Color="{StaticResource Gold}" />
+            <SolidColorBrush x:Key="UpBrush" Color="{StaticResource Up}" />
+            <SolidColorBrush x:Key="DownBrush" Color="{StaticResource Down}" />
+            <!-- Header gradient -->
+            <LinearGradientBrush x:Key="HeaderBrush" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#271C61" Offset="0"/>
+                <GradientStop Color="#0E2A48" Offset="1"/>
+            </LinearGradientBrush>
+
+            <!-- Flash efektleri -->
+            <LinearGradientBrush x:Key="FlashUpBrush" StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="#14392A" Offset="0"/>
+                <GradientStop Color="#1A4736" Offset="1"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="FlashDownBrush" StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="#3A1A1A" Offset="0"/>
+                <GradientStop Color="#4A2424" Offset="1"/>
+            </LinearGradientBrush>
+
+            <!-- Global -->
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{StaticResource Bg}" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Text}" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+            <Style x:Key="MutedLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Muted}" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+
+            <!-- Satır kartı -->
+            <Style x:Key="RowCard" TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource Card}" />
+                <Setter Property="Stroke" Value="{StaticResource Line}" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="Padding" Value="14,12" />
+                <Setter Property="Margin" Value="12,6" />
+                <Setter Property="StrokeShape">
+                    <Setter.Value>
+                        <RoundRectangle CornerRadius="14"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- Header mini kart -->
+            <Style x:Key="MiniCard" TargetType="Border" BasedOn="{StaticResource RowCard}">
+                <Setter Property="Margin" Value="8,0" />
+                <Setter Property="Padding" Value="12,10" />
+                <Setter Property="Background" Value="{StaticResource CardAlt}" />
+            </Style>
+
+            <!-- Yüzde rozeti -->
+            <Style x:Key="Pill" TargetType="Border">
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="Padding" Value="8,4"/>
+                <Setter Property="StrokeShape">
+                    <Setter.Value>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Background" Value="{StaticResource GoldSoft}"/>
+            </Style>
+
+            <!-- Arma kutucuğu -->
+            <Style x:Key="Crest" TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource CardAlt}"/>
+                <Setter Property="Padding" Value="6"/>
+                <Setter Property="StrokeShape">
+                    <Setter.Value>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- Header sol üst arama butonu (TintColor KALDIRILDI) -->
+            <Style x:Key="SearchFab" TargetType="ImageButton">
+                <Setter Property="WidthRequest" Value="36"/>
+                <Setter Property="HeightRequest" Value="36"/>
+                <Setter Property="CornerRadius" Value="18"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource CardAlt}"/>
+                <Setter Property="Padding" Value="6"/>
+                <Setter Property="Opacity" Value="0.95"/>
+            </Style>
+
+            <!-- Converters -->
+            <converters:NullToBoolConverter x:Key="NullToBoolConverter" />
+            <converters:ChangeToColorConverter x:Key="ChangeToColorConverter"
+                                         UpColor="{StaticResource Up}"
+                                         DownColor="{StaticResource Down}" />
+            <converters:PercentTextConverter x:Key="PercentTextConverter" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

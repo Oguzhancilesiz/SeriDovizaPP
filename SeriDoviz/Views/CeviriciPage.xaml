@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeriDoviz.Views.CeviriciPage"
+             BackgroundColor="{StaticResource Bg}">
+
+    <Grid RowDefinitions="170,*" RowSpacing="0">
+
+        <Grid Grid.Row="0" Background="{StaticResource HeaderBrush}" Padding="16,22">
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                <Border Style="{StaticResource Crest}">
+                    <Image Source="seridoviz_arma.png" HeightRequest="24" Aspect="AspectFit"/>
+                </Border>
+                <Label Grid.Column="1" Text="Çevirici" HorizontalTextAlignment="Center"
+               TextColor="{StaticResource Gold}" FontAttributes="Bold" VerticalOptions="Center"/>
+            </Grid>
+        </Grid>
+
+        <ScrollView Grid.Row="1" BackgroundColor="Transparent">
+            <VerticalStackLayout Padding="16" Spacing="16">
+                <Border Style="{StaticResource RowCard}">
+                    <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto,*" ColumnSpacing="12" RowSpacing="14">
+                        <Picker Grid.Column="0" ItemsSource="{Binding Symbols}" SelectedItem="{Binding From}" />
+                        <Border Grid.Column="1" Style="{StaticResource Pill}" Background="{StaticResource GoldSoft}">
+                            <Label Text="⇆" TextColor="{StaticResource Gold}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SwapCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Border>
+                        <Picker Grid.Column="2" ItemsSource="{Binding Symbols}" SelectedItem="{Binding To}" />
+
+                        <BoxView Grid.Row="1" Grid.ColumnSpan="3" HeightRequest="1" Color="{StaticResource Line}" />
+
+                        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="16">
+                            <VerticalStackLayout>
+                                <Label Text="Miktar" Style="{StaticResource MutedLabel}" />
+                                <Entry Keyboard="Numeric" Text="{Binding Amount}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label Text="Sonuç" Style="{StaticResource MutedLabel}" />
+                                <Label Text="{Binding Result, StringFormat='{}{0:N2}'}" FontSize="28" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <Button Text="Hesapla" Command="{Binding CalculateCommand}" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid IsVisible="{Binding OverlayVisible}" InputTransparent="False" BackgroundColor="#AA000000">
+            <Grid VerticalOptions="Center" HorizontalOptions="Center">
+                <Border Background="{StaticResource Card}" StrokeThickness="0" Padding="16" StrokeShape="RoundRectangle 12">
+                    <HorizontalStackLayout Spacing="12" Padding="4">
+                        <ActivityIndicator IsRunning="True" Color="{StaticResource Gold}"/>
+                        <Label Text="Veriler alınıyor... Güncel kurlar çekiliyor" TextColor="{StaticResource Text}"/>
+                    </HorizontalStackLayout>
+                </Border>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</ContentPage>
